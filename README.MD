@@ -1,0 +1,1 @@
+См. tests/IntegrationTest.php

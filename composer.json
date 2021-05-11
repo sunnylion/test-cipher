@@ -1,0 +1,23 @@
+{
+  "name": "sunnylion/test-cipher",
+  "type": "library",
+  "description": "Test problem",
+  "autoload": {
+    "psr-4": {
+      "Sunnylion\\TestCipher\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Sunnylion\\TestCipher\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "guzzlehttp/psr7": "^1.8",
+    "ext-openssl": "*",
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}
