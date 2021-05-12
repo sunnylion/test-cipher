@@ -74,4 +74,9 @@ class SignCleaningStream implements StreamInterface
             throw new RuntimeException('Too short input');
         }
     }
+
+    public function tell(): int
+    {
+        return max(0, $this->stream->tell() - self::CROPPED_MAC_SIZE);
+    }
 }

@@ -11,6 +11,7 @@ use Sunnylion\TestCipher\Stream\SidecarCreatingStream;
 use Sunnylion\TestCipher\Stream\SidecarValidationStream;
 use Sunnylion\TestCipher\Stream\SigningStream;
 use Sunnylion\TestCipher\Stream\SignValidationStream;
+use Sunnylion\TestCipher\Stream\WhatsAppDecryptingStream;
 use Sunnylion\TestCipher\Stream\WhatsAppEncryptingStream;
 
 class IntegrationTest extends AbstractStreamTest
@@ -24,6 +25,17 @@ class IntegrationTest extends AbstractStreamTest
         $whatsAppEncryptingStream = new WhatsAppEncryptingStream($originalFileStream, $cipherParams);
 
         $this->assertData((string)$encryptedFileStream, (string)$whatsAppEncryptingStream);
+    }
+
+    public function testWhatsAppDecrypting()
+    {
+        $originalFileStream = Utils::streamFor(file_get_contents($this->getSamplePath('VIDEO.original')));
+        $encryptedFileStream = Utils::streamFor(file_get_contents($this->getSamplePath('VIDEO.encrypted')));
+        $cipherParams = $this->getCipherParams(self::TYPE_VIDEO);
+
+        $whatsAppDecryptingStream = new WhatsAppDecryptingStream($encryptedFileStream, $cipherParams);
+
+        $this->assertData((string)$originalFileStream, (string)$whatsAppDecryptingStream);
     }
 
     public function testSignValidation()
